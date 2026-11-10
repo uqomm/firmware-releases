@@ -1,0 +1,3 @@
+# Sitio de downloads.uqomm.com: solo la portada y los archivos que leen las apps.
+exclude:
+  - README.md
