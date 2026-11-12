@@ -1,0 +1,21 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://downloads.uqomm.com/schema/manifest-1.json",
+  "title": "uqomm firmware release manifest, format 1",
+  "description": "Format 1 only grows: fields are added, never renamed or removed, and every reader ignores fields it does not know. A breaking change is format 2, in new folders.",
+  "type": "object",
+  "required": ["formato", "producto", "version", "commit", "archivo", "bytes", "sha256", "publicado"],
+  "properties": {
+    "formato": {"const": 1},
+    "producto": {"type": "string", "pattern": "^[a-z0-9][a-z0-9.-]*$", "description": "The folder the manifest is published in."},
+    "tipo": {"type": "string", "pattern": "^[A-Z][A-Z0-9]*$", "description": "Device type, as the test bench knows it: VLAD, ULAD, VJB."},
+    "rev": {"type": "string", "pattern": "^[0-9]+(\\.[0-9]+)*$", "description": "Hardware revision: 25, 25.1, 2.3."},
+    "version": {"type": "string", "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$"},
+    "commit": {"type": "string", "pattern": "^[0-9a-f]{7}$"},
+    "archivo": {"type": "string", "pattern": "^[a-z0-9][a-z0-9.-]*\\.bin$", "description": "Name of the image. The image itself is NOT published here."},
+    "bytes": {"type": "integer", "minimum": 1},
+    "sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "publicado": {"type": "string", "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$"}
+  },
+  "dependentRequired": {"tipo": ["rev"], "rev": ["tipo"]}
+}
